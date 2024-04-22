@@ -66,167 +66,21 @@
                 <div class="main">
                     <!-- chat-list -->
                     <ul class="chat-list">
-                        <li class="flex a-center gap pd10">
+                        <li class="flex a-center gap pd10" v-for="(element, index) in contacts">
 
-                            <img src="./img/avatar_2.jpg" class="circle" alt="">
+                            <img :src=`./img/avatar${element.avatar}.jpg` class="circle" alt="">
 
                             <div class="preview">
                                 <div class="row space-between flex a-center">
-                                    <h3>Michele</h3>
-                                    <span class="hours">16:15</span>
+                                    <h3>{{element.name}}</h3>
+                                    <span class="hours">{{ element.messages[element.messages.length-1].date }}</span>
                                 </div>
-                                <span>Lorem ipsum dolor sit amet</span>
+                                <span>{{ element.messages[element.messages.length-1].message }}</span>
                             </div>
 
                         </li>
 
-                        <li class="flex a-center gap pd10">
-
-                            <img src="./img/avatar_3.jpg" class="circle" alt="">
-
-                            <div class="preview">
-                                <div class="row space-between flex a-center">
-                                    <h3>Fabio</h3>
-                                    <span class="hours">16:05</span>
-                                </div>
-                                <span>Lorem ipsum dolor sit amet</span>
-                            </div>
-
-                        </li>
-                        <li class="flex a-center gap pd10">
-
-                            <img src="./img/avatar_4.jpg" class="circle" alt="">
-
-                            <div class="preview">
-                                <div class="row space-between flex a-center">
-                                    <h3>Samuele</h3>
-                                    <span class="hours">16:03</span>
-                                </div>
-                                <span>Lorem ipsum dolor sit amet</span>
-                            </div>
-
-                        </li>
-                        <li class="flex a-center gap pd10">
-
-                            <img src="./img/avatar_5.jpg" class="circle" alt="">
-
-                            <div class="preview">
-                                <div class="row space-between flex a-center">
-                                    <h3>Alessandro B.</h3>
-                                    <span class="hours">15:50</span>
-                                </div>
-                                <span>Lorem ipsum dolor sit amet</span>
-                            </div>
-
-                        </li>
-                        <li class="flex a-center gap pd10">
-
-                            <img src="./img/avatar_6.jpg" class="circle" alt="">
-
-                            <div class="preview">
-                                <div class="row space-between flex a-center">
-                                    <h3>Claudia</h3>
-                                    <span class="hours">15.45</span>
-                                </div>
-                                <span>Lorem ipsum dolor sit amet</span>
-                            </div>
-
-                        </li>
-                        <li class="flex a-center gap pd10">
-
-                            <img src="./img/avatar_7.jpg" class="circle" alt="">
-
-                            <div class="preview">
-                                <div class="row space-between flex a-center">
-                                    <h3>Alessandro L.</h3>
-                                    <span class="hours">16:15</span>
-                                </div>
-                                <span>Lorem ipsum dolor sit amet</span>
-                            </div>
-
-                        </li>
-                        <li class="flex a-center gap pd10">
-
-                            <img src="./img/avatar_8.jpg" class="circle" alt="">
-
-                            <div class="preview">
-                                <div class="row space-between flex a-center">
-                                    <h3>Federico</h3>
-                                    <span class="hours">15:22</span>
-                                </div>
-                                <span>Lorem ipsum dolor sit amet</span>
-                            </div>
-
-                        </li>
-                        <li class="flex a-center gap pd10">
-
-                            <img src="./img/avatar_1.jpg" class="circle" alt="">
-
-                            <div class="preview">
-                                <div class="row space-between flex a-center">
-                                    <h3>Davide</h3>
-                                    <span class="hours">15:15</span>
-                                </div>
-                                <span>Lorem ipsum dolor sit amet</span>
-                            </div>
-
-                        </li>
-
-                        <li class="flex a-center gap pd10">
-
-                            <img src="./img/avatar_2.jpg" class="circle" alt="">
-
-                            <div class="preview">
-                                <div class="row space-between flex a-center">
-                                    <h3>Domenico</h3>
-                                    <span class="hours">15.10</span>
-                                </div>
-                                <span>Lorem ipsum dolor sit amet</span>
-                            </div>
-
-                        </li>
-
-                        <li class="flex a-center gap pd10">
-
-                            <img src="./img/avatar_3.jpg" class="circle" alt="">
-
-                            <div class="preview">
-                                <div class="row space-between flex a-center">
-                                    <h3>Giuseppe</h3>
-                                    <span class="hours">15.05</span>
-                                </div>
-                                <span>Lorem ipsum dolor sit amet</span>
-                            </div>
-
-                        </li>
-
-                        <li class="flex a-center gap pd10">
-
-                            <img src="./img/avatar_4.jpg" class="circle" alt="">
-
-                            <div class="preview">
-                                <div class="row space-between flex a-center">
-                                    <h3>Walter</h3>
-                                    <span class="hours">15:00</span>
-                                </div>
-                                <span>Lorem ipsum dolor sit amet</span>
-                            </div>
-
-                        </li>
-
-                        <li class="flex a-center gap pd10">
-
-                            <img src="./img/avatar_5.jpg" class="circle" alt="">
-
-                            <div class="preview">
-                                <div class="row space-between flex a-center">
-                                    <h3>Sebastiano</h3>
-                                    <span class="hours">14:59</span>
-                                </div>
-                                <span>Lorem ipsum dolor sit amet</span>
-                            </div>
-
-                        </li>
+                        
                     </ul>
                     <!-- /chat-list -->
                 </div>
