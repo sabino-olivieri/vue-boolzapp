@@ -177,6 +177,7 @@ createApp({
 
             currentChat: 0,
             newMessage: "",
+            strToSearch: "",
 
         }
 
@@ -240,7 +241,31 @@ createApp({
                 status: "received"
             });
 
+            // this.goDown();
+
+
+        },
+
+        goDown() {
+            // da implementare
+            const chatPageElem = document.getElementById("chat-messages");
+            console.log(chatPageElem);
+            chatPageElem.scrollIntoView();
+        },
+
+        searchName () {
+
+            this.contacts.forEach(element => {
+                const name = element.name.toLowerCase()
+                const found = name.includes(this.strToSearch.toLowerCase())
+                if(!found) {
+                    element.visible = false;
+                } else {
+                    element.visible = true;
+                }
+            });
         }
+
     }
 
 }).mount("#app");
