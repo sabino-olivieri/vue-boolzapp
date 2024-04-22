@@ -114,9 +114,10 @@ footer i:hover {
     align-self: flex-end;
 }
 
-.recived {
+.received {
     background-color: white;
     align-self: flex-start;
+    
 }
 
 /* WRAPPER */

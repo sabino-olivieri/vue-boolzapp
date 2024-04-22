@@ -150,7 +150,7 @@ createApp({
                         }
                     ],
                 },
-                
+
                 {
                     name: 'Davide',
                     avatar: '_8',
@@ -175,12 +175,16 @@ createApp({
                 }
             ],
 
+            currentChat : 0,
+
         }
 
     },
 
     methods: {
-
+        changeChat(index) {
+            this.currentChat = index;
+        }
     }
 
 }).mount("#app");

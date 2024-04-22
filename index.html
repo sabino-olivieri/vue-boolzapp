@@ -66,7 +66,7 @@
                 <div class="main">
                     <!-- chat-list -->
                     <ul class="chat-list">
-                        <li class="flex a-center gap pd10" v-for="(element, index) in contacts">
+                        <li class="flex a-center gap pd10" v-for="(element, index) in contacts" @click="changeChat(index)">
 
                             <img :src=`./img/avatar${element.avatar}.jpg` class="circle" alt="">
 
@@ -110,10 +110,8 @@
                 <!-- /header -->
 
                 <main class="flex gap">
-                    <div class="flex message pd10 sent">
-                        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti mollitia, enim, nisi
-                            delectus cum dolorem, sunt error nulla minima cumque eos aut quidem voluptates consequuntur.
-                            Omnis perferendis sint tempore ut.</p>
+                    <div class="flex message pd10" :class="element.status" v-for="(element, index) in contacts[currentChat].messages">
+                        <p> {{ element.message }}</p>
                         <div class="flex space-between">
                             <div class="icon">
                                 <i class="fa-solid fa-chevron-down"></i>
@@ -122,55 +120,12 @@
                                     <li class="flex j-center white"><button>Cancella messaggio</button></li>
                                 </ul>
                             </div>
-                            <span class="hours">16:13</span>
+                            <span class="hours">{{element.date}}</span>
                         </div>
 
                     </div>
 
-                    <div class="flex message pd10 recived">
-                        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti mollitia, enim, nisi
-                            delectus cum dolorem, sunt error nulla minima cumque eos aut quidem voluptates consequuntur.
-                            Omnis perferendis sint tempore ut.</p>
-                        <div class="flex space-between">
-                            <div class="icon">
-                                <i class="fa-solid fa-chevron-down"></i>
-                                <ul class="menu-message">
-                                    <li class="flex j-center white"><button>Inoltra messaggio</button></li>
-                                    <li class="flex j-center white"><button>Cancella messaggio</button></li>
-                                </ul>
-                            </div>
-                            <span class="hours">16:14</span>
-                        </div>
-                    </div>
-
-                    <div class="flex message pd10 sent">
-                        <p> Lorem ipsum dolor sit amet consectetur </p>
-                        <div class="flex space-between">
-                            <div class="icon">
-                                <i class="fa-solid fa-chevron-down"></i>
-                                <ul class="menu-message">
-                                    <li class="flex j-center white"><button>Inoltra messaggio</button></li>
-                                    <li class="flex j-center white"><button>Cancella messaggio</button></li>
-                                </ul>
-                            </div>
-                            <span class="hours">16:15</span>
-                        </div>
-                    </div>
-
-                    <div class="flex message pd10 recived">
-                        <p>ok</p>
-                        <div class="flex space-between">
-                            <div class="icon">
-                                <i class="fa-solid fa-chevron-down"></i>
-                                <ul class="menu-message">
-                                    <li class="flex j-center white"><button>Inoltra messaggio</button></li>
-                                    <li class="flex j-center white"><button>Cancella messaggio</button></li>
-                                </ul>
-                            </div>
-                            <span class="hours">16:16</span>
-                        </div>
-                    </div>
-
+                    
                 </main>
 
                 <footer class="bg-main flex a-center">
