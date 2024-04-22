@@ -60,7 +60,8 @@
 
                         <i class="fa-solid fa-magnifying-glass"></i>
 
-                        <input type="search" name="search" placeholder="Cerca o inizia una nuova chat"  v-model.trim="strToSearch" @keyup="searchName">
+                        <input type="search" name="search" placeholder="Cerca o inizia una nuova chat"
+                            v-model.trim="strToSearch" @keyup="searchName">
                     </div>
                 </div>
                 <!-- /search-box -->
@@ -76,9 +77,9 @@
                             <div class="preview">
                                 <div class="row space-between flex a-center">
                                     <h3>{{element.name}}</h3>
-                                    <span class="hours">{{ element.messages[element.messages.length-1].date }}</span>
+                                    <span class="hours">{{ (element.messages.length > 0) ? element.messages[element.messages.length-1].date : '' }}</span>
                                 </div>
-                                <span>{{ element.messages[element.messages.length-1].message }}</span>
+                                <span>{{ (element.messages.length > 0) ? element.messages[element.messages.length-1].message : '' }}</span>
                             </div>
 
                         </li>
@@ -102,7 +103,7 @@
                         <div class="row space-between">
                             <h3>{{ contacts[currentChat].name }}</h3>
                             <span>Ultimo accesso
-                                {{contacts[currentChat].messages[contacts[currentChat].messages.length-1].date}}</span>
+                                {{(contacts[currentChat].messages.length > 0) ? contacts[currentChat].messages[contacts[currentChat].messages.length-1].date : 'nascosto'}}</span>
                         </div>
                     </div>
 
@@ -116,16 +117,17 @@
                 <!-- /header -->
 
                 <main class="flex gap" id="chat-messages">
+                    <div class="overlay-menu" v-show="viewOverlay" @click="hideMenu"></div>
                     <div class="flex message pd10" :class="element.status"
                         v-for="(element, index) in contacts[currentChat].messages">
                         <p> {{ element.message }}</p>
                         <div class="flex space-between">
-                            <div class="icon">
+                            <div class="icon" @click="showMenu(index)">
                                 <i class="fa-solid fa-chevron-down"></i>
-                                <ul class="menu-message">
-                                    <li class="flex j-center white"><button>Inoltra messaggio</button></li>
-                                    <li class="flex j-center white"><button>Cancella messaggio</button></li>
-                                </ul>
+                                    <ul class="menu-message" v-show="element.visibleMenu">
+                                        <li class="flex j-center white"><button @click.stop="hideMenu">Inoltra messaggio</button></li>
+                                        <li class="flex j-center white"><button @click.stop="deleteMessage(index)">Cancella messaggio</button></li>
+                                    </ul>
                             </div>
                             <span class="hours">{{element.date}}</span>
                         </div>
