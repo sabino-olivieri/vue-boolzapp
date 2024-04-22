@@ -175,15 +175,71 @@ createApp({
                 }
             ],
 
-            currentChat : 0,
+            currentChat: 0,
+            newMessage: "",
 
         }
 
     },
 
     methods: {
+
         changeChat(index) {
             this.currentChat = index;
+        },
+
+        sentMessage() {
+
+            if (this.newMessage != "") {
+                // prendo data corrente
+                const now = luxon.DateTime.now();
+                // converto data nel formato usato
+                const strDate = now.toLocaleString(luxon.DateTime.DATE_SHORT) + ' ' + now.toLocaleString(luxon.DateTime.TIME_WITH_SECONDS);
+                console.log(strDate);
+
+                this.contacts[this.currentChat].messages.push({
+                    date: strDate,
+                    message: this.newMessage,
+                    status: 'sent'
+                });
+                this.newMessage = "";
+
+                const timeOut = setTimeout(this.autoReply,2000);
+                
+
+            }
+        },
+
+        autoReply() {
+
+            const numReply = Math.floor(Math.random() * 3) + 1;
+            console.log(numReply);
+
+            let strReply = "Ok";
+
+            switch (numReply) {
+                case 2:
+                    strReply = "Va bene";
+                    break;
+
+                case 3:
+                    strReply = "No"
+                default:
+                    break;
+            }
+
+
+            const now = luxon.DateTime.now();
+                // converto data nel formato usato
+                const strDate = now.toLocaleString(luxon.DateTime.DATE_SHORT) + ' ' + now.toLocaleString(luxon.DateTime.TIME_WITH_SECONDS);
+                console.log(strDate);
+
+            this.contacts[this.currentChat].messages.push({
+                date: strDate,
+                message: strReply,
+                status: "received"
+            });
+
         }
     }
 

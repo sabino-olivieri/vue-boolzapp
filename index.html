@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/responsive.css">
     <link rel="stylesheet" href="./css/dark.css" media="(prefers-color-scheme: dark)">
+
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
     <!-- vue js -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
@@ -66,7 +68,8 @@
                 <div class="main">
                     <!-- chat-list -->
                     <ul class="chat-list">
-                        <li class="flex a-center gap pd10" :class="{'selected' : index === currentChat}" v-for="(element, index) in contacts" @click="changeChat(index)">
+                        <li class="flex a-center gap pd10" :class="{'selected' : index === currentChat}"
+                            v-for="(element, index) in contacts" @click="changeChat(index)">
 
                             <img :src=`./img/avatar${element.avatar}.jpg` class="circle" alt="">
 
@@ -80,8 +83,8 @@
 
                         </li>
 
-                        
-                        
+
+
                     </ul>
                     <!-- /chat-list -->
                 </div>
@@ -94,10 +97,12 @@
                 <header class="bg-main flex a-center space-between pd10">
 
                     <div class="contact flex a-center gap">
-                        <img class="circle" src="./img/avatar_2.jpg" alt="Immagine profilo">
+                        <img class="circle" :src=`./img/avatar${contacts[currentChat].avatar}.jpg`
+                            alt="Immagine profilo">
                         <div class="row space-between">
-                            <h3>Sebastiano</h3>
-                            <span>Ultimo accesso oggi alle 16:26</span>
+                            <h3>{{ contacts[currentChat].name }}</h3>
+                            <span>Ultimo accesso
+                                {{contacts[currentChat].messages[contacts[currentChat].messages.length-1].date}}</span>
                         </div>
                     </div>
 
@@ -111,7 +116,8 @@
                 <!-- /header -->
 
                 <main class="flex gap">
-                    <div class="flex message pd10" :class="element.status" v-for="(element, index) in contacts[currentChat].messages">
+                    <div class="flex message pd10" :class="element.status"
+                        v-for="(element, index) in contacts[currentChat].messages">
                         <p> {{ element.message }}</p>
                         <div class="flex space-between">
                             <div class="icon">
@@ -126,12 +132,13 @@
 
                     </div>
 
-                    
+
                 </main>
 
                 <footer class="bg-main flex a-center">
                     <button><i class="fa-regular fa-face-smile"></i></button>
-                    <input type="text" name="text" placeholder="Cerca o inizia una nuova chat">
+                    <input type="text" name="text" placeholder="Cerca o inizia una nuova chat" v-model.trim="newMessage"
+                        @keyup.enter="sentMessage">
                     <button><i class="fa-solid fa-microphone"></i></button>
                 </footer>
             </div>
