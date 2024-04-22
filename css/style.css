@@ -1,5 +1,6 @@
 :root {
     --main-color: #EAEAEA;
+    --selected-color: #EAEAEA;
     --header-height: 60px;
     --notifications-height: 60px;
     --search-box-height: 40px;
@@ -222,6 +223,10 @@ header .menu-list i {
 
 .row {
     flex-wrap: wrap;
+}
+
+.selected {
+    background-color: var(--selected-color);
 }
 
 /* CHAT */

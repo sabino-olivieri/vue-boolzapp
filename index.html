@@ -66,7 +66,7 @@
                 <div class="main">
                     <!-- chat-list -->
                     <ul class="chat-list">
-                        <li class="flex a-center gap pd10" v-for="(element, index) in contacts" @click="changeChat(index)">
+                        <li class="flex a-center gap pd10" :class="{'selected' : index === currentChat}" v-for="(element, index) in contacts" @click="changeChat(index)">
 
                             <img :src=`./img/avatar${element.avatar}.jpg` class="circle" alt="">
 
@@ -80,6 +80,7 @@
 
                         </li>
 
+                        
                         
                     </ul>
                     <!-- /chat-list -->
