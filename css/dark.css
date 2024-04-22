@@ -1,0 +1,85 @@
+body {
+    background: linear-gradient(#005C4B 20% ,  #000000 20% ,  #000000 60%); 
+    color: white;
+}
+
+:root {
+    --main-color: #2C2C2C;
+    --header-height: 60px;
+    --notifications-height: 60px;
+    --search-box-height: 40px;
+    --footer-height: 60px;
+}
+
+.white {
+    background-color: var(--main-color) ;
+}
+
+input[type="search"], input[type="text"] {
+    background-color: var(--main-color);
+    color: rgb(255, 255, 255);
+
+}
+
+header{
+    border-right: 1px solid gray;
+}
+
+header .menu-list i {
+    color: lightgrey;
+}
+
+.chat-name {
+    
+    background-color: #202020;
+}
+
+.chat header {
+    border: 0;
+}
+
+.notifications {
+    background-color: #004d70;
+}
+
+.notifications i {
+    color: #004d70;
+}
+
+.sent {
+    background-color: #005C4B;
+}
+
+.recived {
+    background-color: var(--main-color);
+}
+
+.chat main {
+    background-image: url(../img/mine-dark.jpg);
+}
+
+.notifications span,
+.chat-list li span,
+.chat header .contact span,
+.chat main .message .space-between,
+footer button i  { 
+    color: lightgray;
+}
+
+header .menu-list i:hover,
+footer i:hover {
+    color: #005C4B;
+}
+
+.menu-message { 
+    box-shadow: 0px 1px 5px lightgrey,
+                0px -1px 5px lightgrey;
+}
+
+.chat .menu-message li:hover {
+    background-color:#005C4B;   
+}
+
+.menu-message button {
+    color: white;
+}
