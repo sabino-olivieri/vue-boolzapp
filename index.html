@@ -101,8 +101,7 @@
                             alt="Immagine profilo">
                         <div class="row space-between">
                             <h3>{{ contacts[currentChat].name }}</h3>
-                            <span>Ultimo accesso
-                                {{(contacts[currentChat].messages.length > 0) ? contacts[currentChat].messages[contacts[currentChat].messages.length-1].date : 'nascosto'}}</span>
+                            <span> {{ lastAccess() }} </span>
                         </div>
                     </div>
 

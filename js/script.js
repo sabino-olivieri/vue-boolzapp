@@ -200,6 +200,7 @@ createApp({
             newMessage: "",
             strToSearch: "",
             viewOverlay: false,
+            strAccess: "",
 
         }
 
@@ -209,16 +210,14 @@ createApp({
 
         changeChat(index) {
             this.currentChat = index;
+            this.strAccess = "";
         },
 
         sentMessage() {
 
             if (this.newMessage != "") {
-                // prendo data corrente
-                const now = luxon.DateTime.now();
-                // converto data nel formato usato
-                const strDate = now.toLocaleString(luxon.DateTime.DATE_SHORT) + ' ' + now.toLocaleString(luxon.DateTime.TIME_WITH_SECONDS);
-                console.log(strDate);
+                
+                const strDate = this.currentDate();
 
                 this.contacts[this.currentChat].messages.push({
                     date: strDate,
@@ -228,14 +227,16 @@ createApp({
                 });
                 this.newMessage = "";
 
-                const timeOut = setTimeout(this.autoReply,2000);
-                
+                this.strAccess = "Sta scrivendo..."
+                this.lastAccess();
+                const timeOut = setTimeout(this.autoReply, 2000);
+
 
             }
         },
 
         autoReply() {
-
+            this.strAccess = "Online"
             const numReply = Math.floor(Math.random() * 3) + 1;
             console.log(numReply);
 
@@ -253,10 +254,7 @@ createApp({
             }
 
 
-            const now = luxon.DateTime.now();
-                // converto data nel formato usato
-                const strDate = now.toLocaleString(luxon.DateTime.DATE_SHORT) + ' ' + now.toLocaleString(luxon.DateTime.TIME_WITH_SECONDS);
-                console.log(strDate);
+            const strDate = this.currentDate();
 
             this.contacts[this.currentChat].messages.push({
                 date: strDate,
@@ -264,9 +262,23 @@ createApp({
                 status: "received"
             });
 
+            const timeAccess = setTimeout(() => {
+                this.strAccess = "now";
+                this.lastAccess();
+            },2000) 
+
             // this.goDown();
 
 
+        },
+
+        currentDate() {
+
+            const now = luxon.DateTime.now();
+            // converto data nel formato usato
+            const strDate = now.toLocaleString(luxon.DateTime.DATE_SHORT) + ' ' + now.toLocaleString(luxon.DateTime.TIME_WITH_SECONDS);
+
+            return strDate;
         },
 
         goDown() {
@@ -276,12 +288,12 @@ createApp({
             chatPageElem.scrollIntoView();
         },
 
-        searchName () {
+        searchName() {
 
             this.contacts.forEach(element => {
                 const name = element.name.toLowerCase()
                 const found = name.includes(this.strToSearch.toLowerCase())
-                if(!found) {
+                if (!found) {
                     element.visible = false;
                 } else {
                     element.visible = true;
@@ -305,8 +317,39 @@ createApp({
         deleteMessage(index) {
             console.log("canc");
             this.hideMenu();
+
+            this.strAccess = "";
             this.contacts[this.currentChat].messages.splice(index, 1);
-            
+
+        },
+
+        lastAccess() {
+
+            if (this.strAccess === "") {
+
+                let cont = 0;
+
+                if (this.contacts[this.currentChat].messages.length > 0) {
+
+                    this.contacts[this.currentChat].messages.forEach(element => {
+                        if (element.status === "received") {
+                            this.strAccess = "Ultimo accesso " + element.date;
+                            cont++;
+                        } 
+                    });
+
+                    if (cont === 0){
+                        this.strAccess = "Ultimo accesso nascosto";
+                    }
+                } else {
+                    this.strAccess = "Ultimo accesso nascosto";
+                }
+                
+            } else if (this.strAccess === "now") {
+                this.strAccess = "Ultimo accesso " + this.currentDate();
+            }
+
+            return this.strAccess;
         }
 
     }
