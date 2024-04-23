@@ -30,9 +30,9 @@
                     <img class="circle" src="./img/avatar_1.jpg" alt="Immagine profilo">
 
                     <ul class="menu-list flex gap">
-                        <li><button><i class="fa-solid fa-circle-notch"></i></button></li>
-                        <li><button><i class="fa-solid fa-message"></i></button></li>
-                        <li><button><i class="fa-solid fa-ellipsis-vertical"></i></button></li>
+                        <li><button class="btn"><i class="fa-solid fa-circle-notch"></i></button></li>
+                        <li><button class="btn"><i class="fa-solid fa-message"></i></button></li>
+                        <li><button class="btn"><i class="fa-solid fa-ellipsis-vertical"></i></button></li>
                     </ul>
 
                 </header>
@@ -67,7 +67,7 @@
 
                 <div class="main">
                     <!-- chat-list -->
-                    <ul class="chat-list">
+                    <ul class="chat-list" v-if="contacts.length > 0">
                         <li class="flex a-center gap pd10" :class="{'selected' : index === currentChat}"
                             v-for="(element, index) in contacts" @click="changeChat(index)" v-show="element.visible">
 
@@ -94,9 +94,9 @@
 
             <div class="chat">
                 <!-- header -->
-                <header class="bg-main flex a-center space-between pd10">
+                <header class="bg-main flex a-center space-between pd10" :style="contacts.length === 0 ? 'justify-content : flex-end' : ''">
 
-                    <div class="contact flex a-center gap">
+                    <div class="contact flex a-center gap" v-if="contacts.length > 0">
                         <img class="circle" :src=`./img/avatar${contacts[currentChat].avatar}.jpg`
                             alt="Immagine profilo">
                         <div class="row space-between">
@@ -106,9 +106,14 @@
                     </div>
 
                     <ul class="menu-list flex gap">
-                        <li><button><i class="fa-solid fa-magnifying-glass"></i></button></li>
-                        <li><button><i class="fa-solid fa-paperclip"></i></button></li>
-                        <li><button><i class="fa-solid fa-ellipsis-vertical"></i></button></li>
+                        <li><button class="btn"><i class="fa-solid fa-magnifying-glass"></i></button></li>
+                        <li><button class="btn"><i class="fa-solid fa-paperclip"></i></button></li>
+                        <li><button class="btn" @click="toggleMenuChat"><i class="fa-solid fa-ellipsis-vertical"></i></button></li>
+                    </ul>
+
+                    <ul class="menu-message chat-menu" v-show="chatMenu">
+                        <li class="flex j-center white" @click.stop="deleteAllMessage()"><button >Elimina messaggi</button></li>
+                        <li class="flex j-center white" @click.stop="deleteChat()"><button>Elimina chat</button></li>
                     </ul>
 
                 </header>
@@ -116,6 +121,8 @@
 
                 <main class="flex gap" id="chat-messages">
                     <div class="overlay-menu" v-show="viewOverlay" @click="hideMenu"></div>
+                    
+                    <div class="flex gap column" v-if="contacts.length > 0">
                     <div class="flex message pd10" :class="element.status"
                         v-for="(element, index) in contacts[currentChat].messages">
                         <p> {{ element.message }}</p>
@@ -131,7 +138,7 @@
                         </div>
 
                     </div>
-
+                </div>
 
                 </main>
 
@@ -139,7 +146,8 @@
                     <button><i class="fa-regular fa-face-smile"></i></button>
                     <input type="text" name="text" placeholder="Cerca o inizia una nuova chat" v-model.trim="newMessage"
                         @keyup.enter="sentMessage">
-                    <button @click="sentMessage"><i :class="(newMessage.length === 0) ? 'fa-solid fa-paperclip' : 'fa-solid fa-paper-plane' "></i></button>
+                    <button v-if="newMessage.length === 0"><i class="fa-solid fa-paperclip"></i></button>
+                    <button @click="sentMessage" v-else><i class="fa-solid fa-paper-plane"></i></button>
                 </footer>
             </div>
 

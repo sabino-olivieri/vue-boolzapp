@@ -201,6 +201,7 @@ createApp({
             strToSearch: "",
             viewOverlay: false,
             strAccess: "",
+            chatMenu: false,
 
         }
 
@@ -210,13 +211,13 @@ createApp({
 
         changeChat(index) {
             this.currentChat = index;
-            this.strAccess = "";
+            this.resetStrAccess();
         },
 
         sentMessage() {
 
             if (this.newMessage != "") {
-                
+
                 const strDate = this.currentDate();
 
                 this.contacts[this.currentChat].messages.push({
@@ -265,7 +266,7 @@ createApp({
             const timeAccess = setTimeout(() => {
                 this.strAccess = "now";
                 this.lastAccess();
-            },2000) 
+            }, 2000)
 
             // this.goDown();
 
@@ -308,19 +309,51 @@ createApp({
 
         hideMenu() {
             this.viewOverlay = false;
-            this.contacts[this.currentChat].messages.forEach(element => {
-                element.visibleMenu = false;
-                console.log(element.visibleMenu);
-            });
+            this.chatMenu = false;
+            if (this.contacts.length > 0) {
+                this.contacts[this.currentChat].messages.forEach(element => {
+                    element.visibleMenu = false;
+                    console.log(element.visibleMenu);
+                });
+            }
         },
 
         deleteMessage(index) {
             console.log("canc");
             this.hideMenu();
 
-            this.strAccess = "";
+            this.resetStrAccess();
             this.contacts[this.currentChat].messages.splice(index, 1);
 
+        },
+
+        deleteAllMessage() {
+            this.hideMenu();
+
+            this.resetStrAccess();
+            if(this.contacts.length > 0){
+
+                this.contacts[this.currentChat].messages = [];
+            }
+
+        },
+
+        deleteChat() {
+            this.hideMenu();
+            this.resetStrAccess();
+            if (this.contacts.length > 0) {
+
+                this.contacts.splice(this.currentChat, 1);
+
+                if (this.currentChat > this.contacts.length - 1) {
+                    console.log("ok");
+                    this.currentChat--;
+                }
+            }
+        },
+
+        resetStrAccess() {
+            this.strAccess = "";
         },
 
         lastAccess() {
@@ -335,21 +368,26 @@ createApp({
                         if (element.status === "received") {
                             this.strAccess = "Ultimo accesso " + element.date;
                             cont++;
-                        } 
+                        }
                     });
 
-                    if (cont === 0){
+                    if (cont === 0) {
                         this.strAccess = "Ultimo accesso nascosto";
                     }
                 } else {
                     this.strAccess = "Ultimo accesso nascosto";
                 }
-                
+
             } else if (this.strAccess === "now") {
                 this.strAccess = "Ultimo accesso " + this.currentDate();
             }
 
             return this.strAccess;
+        },
+
+        toggleMenuChat() {
+            this.chatMenu = !this.chatMenu;
+            this.viewOverlay = true;
         }
 
     }

@@ -73,6 +73,10 @@ footer i:hover {
     display: flex;
 }
 
+.column {
+    flex-direction: column;
+}
+
 .a-center {
     align-items: center;
 }
@@ -95,6 +99,7 @@ footer i:hover {
 
 .bg-main {
     background-color: var(--main-color);
+    position: relative;
 }
 
 .white {
@@ -245,6 +250,11 @@ header .menu-list i {
     font-size: 14px
 }
 
+.btn {
+    width: 30px;
+    text-align: center;
+}
+
 .chat main {
     height: calc(100% - var(--header-height) - var(--footer-height));
     overflow-y: auto;
@@ -277,7 +287,6 @@ header .menu-list i {
 .menu-message {
     width: 12rem;
     position: absolute;
-    top: 0px;
     box-shadow: 0px 4px 10px grey,
                 0px -4px 10px grey;
     transition: 0.8s ease 0s;
@@ -290,6 +299,11 @@ header .menu-list i {
 
 .recived .menu-message {
     left: 0;
+}
+
+.chat-menu {
+    right: 10px;
+    top: 50px;
 }
 
 .menu-message li {
