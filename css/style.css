@@ -1,6 +1,7 @@
 :root {
     --main-color: #EAEAEA;
     --selected-color: #EAEAEA;
+    --whatsapp-color: #009688;
     --header-height: 60px;
     --notifications-height: 60px;
     --search-box-height: 40px;
@@ -44,6 +45,12 @@ input[type="search"], input[type="text"] {
     border-radius: 5px;
 }
 
+#new-chat-name{
+    width: 80%;
+    max-width: 500px;
+    height: 10%;
+}
+
 /* LAYOUT */    
 
 body {
@@ -59,6 +66,20 @@ body {
 .wrapper {
     width: 80%;
     height: 95%;
+}
+
+.create-new-chat {
+    width: 75%;
+    height: 90%;
+    border-radius: 20px;
+    position: absolute;
+    z-index: 9999;
+    background-color: var(--main-color);
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    padding: 50px;
+    transition: all 1s;
 }
 
 header .menu-list i:hover,
@@ -89,12 +110,19 @@ footer i:hover {
     justify-content: space-between;
 }
 
+.t-center {
+    text-align: center;
+}
+
 .gap {
     gap: 10px;
 }
 
 .pd10 {
     padding: 10px;
+}
+.mt50 {
+    margin-top: 50px;
 }
 
 .bg-main {
@@ -234,6 +262,16 @@ header .menu-list i {
     background-color: var(--selected-color);
 }
 
+#new-chat-name {
+    background-color: var(--whatsapp-color);
+    color: white;
+}
+
+.avatar-selected {
+    border: 2px solid rgb(0, 157, 255);
+    transform: scale(125%);
+}
+
 /* CHAT */
 
 .chat header h3{
@@ -253,6 +291,13 @@ header .menu-list i {
 .btn {
     width: 30px;
     text-align: center;
+}
+
+.avvia-chat {
+    padding: 10px;
+    border-radius: 20px;
+    background-color: var(--whatsapp-color);
+    color: white;
 }
 
 .chat main {
@@ -319,6 +364,7 @@ header .menu-list i {
     left: 0;
     position: absolute;
     z-index: 100;
+    background-color: rgba(128, 128, 128, 0.096);
 }
 
 .chat .icon .menu-message {

@@ -202,6 +202,9 @@ createApp({
             viewOverlay: false,
             strAccess: "",
             chatMenu: false,
+            selectedAvatar: 0,
+            viewNewChat: false,
+            nameNewChat: "",
 
         }
 
@@ -212,6 +215,10 @@ createApp({
         changeChat(index) {
             this.currentChat = index;
             this.resetStrAccess();
+        },
+
+        changeAvatar(num) {
+            this.selectedAvatar = num;
         },
 
         sentMessage() {
@@ -310,6 +317,7 @@ createApp({
         hideMenu() {
             this.viewOverlay = false;
             this.chatMenu = false;
+            this.viewNewChat = false;
             if (this.contacts.length > 0) {
                 this.contacts[this.currentChat].messages.forEach(element => {
                     element.visibleMenu = false;
@@ -388,7 +396,44 @@ createApp({
         toggleMenuChat() {
             this.chatMenu = !this.chatMenu;
             this.viewOverlay = true;
-        }
+        },
+
+        newChatMenu() {
+            this.viewNewChat = true;
+            this.viewOverlay = true;
+        },
+
+        startNewChat() {
+
+            let newStrName = "";
+
+
+            for (let index = 0; index < this.nameNewChat.length; index++) {
+                const element = this.nameNewChat[index];
+
+                if(index === 0) {
+                    newStrName += element.toUpperCase();
+                } else {
+                    newStrName += element.toLowerCase();
+                }
+                
+            }
+
+            const newObject = {
+                name: newStrName,
+                avatar: `_${this.selectedAvatar}`,
+                visible: true,
+                messages: [],
+            }
+
+            
+            this.nameNewChat = "";
+            this.contacts.unshift(newObject);
+            this.currentChat = 0;
+            this.resetStrAccess();
+            this.hideMenu();
+
+        },
 
     }
 
