@@ -205,6 +205,7 @@ createApp({
             selectedAvatar: 0,
             viewNewChat: false,
             nameNewChat: "",
+            warning: false,
 
         }
 
@@ -405,6 +406,8 @@ createApp({
 
         startNewChat() {
 
+            if(this.selectedAvatar != 0 && this.nameNewChat != "") {
+
             let newStrName = "";
 
 
@@ -432,6 +435,11 @@ createApp({
             this.currentChat = 0;
             this.resetStrAccess();
             this.hideMenu();
+            this.warning = false;
+
+        } else {
+            this.warning = true;
+        }
 
         },
 

@@ -272,6 +272,12 @@ header .menu-list i {
     transform: scale(125%);
 }
 
+.warning {
+    background-color: lightcoral;
+    padding: 10px;
+    border-radius: 10px;
+}
+
 /* CHAT */
 
 .chat header h3{
