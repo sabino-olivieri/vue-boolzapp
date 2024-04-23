@@ -26,7 +26,8 @@
             <div class="create-new-chat flex a-center j-center column gap t-center" v-show="viewNewChat">
                 <label for="new-chat-name">Inserisci il nome della persona con cui vuoi chattare</label>
                 <input type="text" id="new-chat-name" placeholder="Nome: Sabino" v-model.trim="nameNewChat">
-                <div class="flex gap row j-center pd10 mt50">
+                <span class="mt50">Seleziona un avatar</span>
+                <div class="flex gap row j-center pd10">
                     <div  v-for="num in 8" @click="changeAvatar(num)">
                         <img class="circle" 
                         :class=" num === selectedAvatar ? 'avatar-selected' : ''" 
@@ -152,6 +153,8 @@
                         </div>
 
                     </div>
+                    <a href="#bottom"><button id="go-down"></button></a>
+                    <span id="bottom"></span>
                 </div>
 
                 </main>

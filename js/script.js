@@ -216,6 +216,7 @@ createApp({
         changeChat(index) {
             this.currentChat = index;
             this.resetStrAccess();
+            this.goDown();
         },
 
         changeAvatar(num) {
@@ -236,10 +237,11 @@ createApp({
                 });
                 this.newMessage = "";
 
+                this.goDown();
                 this.strAccess = "Sta scrivendo..."
                 this.lastAccess();
                 const timeOut = setTimeout(this.autoReply, 2000);
-
+                
 
             }
         },
@@ -276,7 +278,7 @@ createApp({
                 this.lastAccess();
             }, 2000)
 
-            // this.goDown();
+            this.goDown();
 
 
         },
@@ -291,10 +293,9 @@ createApp({
         },
 
         goDown() {
-            // da implementare
-            const chatPageElem = document.getElementById("chat-messages");
-            console.log(chatPageElem);
-            chatPageElem.scrollIntoView();
+
+            document.getElementById('go-down').click();
+
         },
 
         searchName() {
@@ -340,7 +341,7 @@ createApp({
             this.hideMenu();
 
             this.resetStrAccess();
-            if(this.contacts.length > 0){
+            if (this.contacts.length > 0) {
 
                 this.contacts[this.currentChat].messages = [];
             }
@@ -406,40 +407,40 @@ createApp({
 
         startNewChat() {
 
-            if(this.selectedAvatar != 0 && this.nameNewChat != "") {
+            if (this.selectedAvatar != 0 && this.nameNewChat != "") {
 
-            let newStrName = "";
+                let newStrName = "";
 
 
-            for (let index = 0; index < this.nameNewChat.length; index++) {
-                const element = this.nameNewChat[index];
+                for (let index = 0; index < this.nameNewChat.length; index++) {
+                    const element = this.nameNewChat[index];
 
-                if(index === 0) {
-                    newStrName += element.toUpperCase();
-                } else {
-                    newStrName += element.toLowerCase();
+                    if (index === 0) {
+                        newStrName += element.toUpperCase();
+                    } else {
+                        newStrName += element.toLowerCase();
+                    }
+
                 }
-                
+
+                const newObject = {
+                    name: newStrName,
+                    avatar: `_${this.selectedAvatar}`,
+                    visible: true,
+                    messages: [],
+                }
+
+
+                this.nameNewChat = "";
+                this.contacts.unshift(newObject);
+                this.currentChat = 0;
+                this.resetStrAccess();
+                this.hideMenu();
+                this.warning = false;
+
+            } else {
+                this.warning = true;
             }
-
-            const newObject = {
-                name: newStrName,
-                avatar: `_${this.selectedAvatar}`,
-                visible: true,
-                messages: [],
-            }
-
-            
-            this.nameNewChat = "";
-            this.contacts.unshift(newObject);
-            this.currentChat = 0;
-            this.resetStrAccess();
-            this.hideMenu();
-            this.warning = false;
-
-        } else {
-            this.warning = true;
-        }
 
         },
 
