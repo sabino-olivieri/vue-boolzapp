@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="./css/responsive.css">
     <link rel="stylesheet" href="./css/dark.css" media="(prefers-color-scheme: dark)">
 
-    <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
     <!-- vue js -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
@@ -61,7 +60,7 @@
                         <i class="fa-solid fa-magnifying-glass"></i>
 
                         <input type="search" name="search" placeholder="Cerca o inizia una nuova chat"
-                            v-model.trim="strToSearch" @keyup="searchName">
+                            v-model.trim="strToSearch" @input="searchName">
                     </div>
                 </div>
                 <!-- /search-box -->
@@ -141,13 +140,16 @@
                     <button><i class="fa-regular fa-face-smile"></i></button>
                     <input type="text" name="text" placeholder="Cerca o inizia una nuova chat" v-model.trim="newMessage"
                         @keyup.enter="sentMessage">
-                    <button><i class="fa-solid fa-microphone"></i></button>
+                    <button @click="sentMessage"><i :class="(newMessage.length === 0) ? 'fa-solid fa-paperclip' : 'fa-solid fa-paper-plane' "></i></button>
                 </footer>
             </div>
 
         </div>
     </div>
 
+    <!-- luxon cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
+    <!-- custom script -->
     <script src="./js/script.js"></script>
 </body>
 
