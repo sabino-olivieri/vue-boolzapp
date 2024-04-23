@@ -8,6 +8,8 @@
     --footer-height: 60px;
 }
 
+
+
 /* DESKTOP FIRST */
 
 /* RESET */
@@ -313,6 +315,7 @@ header .menu-list i {
     background-image: url(../img/mine.jpg);
     padding: 50px 50px 0px 50px;
     flex-direction: column;
+    scroll-behavior: smooth;
 }
 
 .chat .message {
